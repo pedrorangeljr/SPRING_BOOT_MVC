@@ -22,11 +22,15 @@ public class PessoaController {
 	}
 	
 	@PostMapping(value = "/salvarpessoa")
-	public String salvar(Pessoa pessoa) {
+	public ModelAndView salvar(Pessoa pessoa) {
 		
 		pessoaRepository.save(pessoa);
 		
-		return "cadastro/cadastropessoa";
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		Iterable<Pessoa> pessoaIt = pessoaRepository.findAll();
+		andView.addObject("pessoas", pessoaIt);
+		
+		return andView;
 	}
 	
 	@GetMapping(value = "/listapessoas")
@@ -38,4 +42,6 @@ public class PessoaController {
 		
 		return andView;
 	}
+	
+	
 }
