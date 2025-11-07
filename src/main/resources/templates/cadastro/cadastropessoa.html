@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div align="center" style="margin-top: 20px;">
-		<form action="salvarpessoa" method="post">
+		<form action="salvarpessoa" method="post" th:object="${pessoaobj}">
 
 			<table border="1" cellpadding="5">
 
@@ -18,22 +18,27 @@
 				<br />
 
 				<tr>
+					<th>ID:</th>
+					<td><input name="id" id="nome" size="45" th:field="*{id}" readonly="readonly"
+						required="required" /></td>
+				</tr>
+				<tr>
 					<th>Nome:</th>
-					<td><input type="text" name="nome" id="nome" size="45"
+					<td><input type="text" name="nome" id="nome" size="45" th:field="*{nome}"
 						required="required" /></td>
 				</tr>
 				<tr>
 					<th>Sobrenome:</th>
-					<td><input type="text" name="sobrenome" id="sobrenome"
+					<td><input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}"
 						size="45" /></td>
 				</tr>
 				<tr>
 					<th>Email:</th>
-					<td><input type="email" name="email" id="email" size="45" /></td>
+					<td><input type="email" name="email" id="email" size="45" th:field="*{email}" /></td>
 				</tr>
 				<tr>
 					<th>Idade:</th>
-					<td><input type="number" name="idade" id="idade" size="45" /></td>
+					<td><input type="number" name="idade" id="idade" size="45" th:field="*{idade}"/></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
@@ -43,11 +48,10 @@
 		</form>
 	</div>
 	<br />
-	<a href="/listapessoas">Lista de Pessoas</a>
-	<br/>
+	<!-- <a href="/listapessoas">Lista de Pessoas</a> -->
+	<br />
 	<div align="center">
 
-		<br />
 		<table border="1" cellpadding="5">
 
 			<tr>
@@ -56,14 +60,19 @@
 				<th>Sobrenome</th>
 				<th>Email</th>
 				<th>Idade</th>
+				<th>Ações</th>
 			</tr>
 
-			<tr th:each = "pessoa : ${pessoas}">
-			    <td th:text = "${pessoa.id}"></td>
-			    <td th:text = "${pessoa.nome}"></td>
-			    <td th:text = "${pessoa.sobrenome}"></td>
-			    <td th:text = "${pessoa.email}"></td>
-			    <td th:text = "${pessoa.idade}"></td>
+			<tr th:each="pessoa : ${pessoas}">
+				<td th:text="${pessoa.id}"></td>
+				<td th:text="${pessoa.nome}"></td>
+				<td th:text="${pessoa.sobrenome}"></td>
+				<td th:text="${pessoa.email}"></td>
+				<td th:text="${pessoa.idade}"></td>
+				<td><a
+					th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}" />Editar</a>
+					&nbsp;&nbsp;&nbsp;&nbsp; <a href=""
+					onclick="return confirm('Tem certeza que deseja excluir ?')">Excluir</a></td>
 			</tr>
 
 		</table>
