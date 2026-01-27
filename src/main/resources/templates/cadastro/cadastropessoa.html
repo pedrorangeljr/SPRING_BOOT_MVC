@@ -19,26 +19,28 @@
 
 				<tr>
 					<th>ID:</th>
-					<td><input name="id" id="nome" size="45" th:field="*{id}" readonly="readonly"
-						required="required" /></td>
+					<td><input name="id" id="nome" size="45" th:field="*{id}"
+						readonly="readonly" required="required" /></td>
 				</tr>
 				<tr>
 					<th>Nome:</th>
-					<td><input type="text" name="nome" id="nome" size="45" th:field="*{nome}"
-						required="required" /></td>
+					<td><input type="text" name="nome" id="nome" size="45"
+						th:field="*{nome}" required="required" /></td>
 				</tr>
 				<tr>
 					<th>Sobrenome:</th>
-					<td><input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}"
-						size="45" /></td>
+					<td><input type="text" name="sobrenome" id="sobrenome"
+						th:field="*{sobrenome}" size="45" /></td>
 				</tr>
 				<tr>
 					<th>Email:</th>
-					<td><input type="email" name="email" id="email" size="45" th:field="*{email}" /></td>
+					<td><input type="email" name="email" id="email" size="45"
+						th:field="*{email}" /></td>
 				</tr>
 				<tr>
 					<th>Idade:</th>
-					<td><input type="number" name="idade" id="idade" size="45" th:field="*{idade}"/></td>
+					<td><input type="number" name="idade" id="idade" size="45"
+						th:field="*{idade}" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
@@ -48,8 +50,26 @@
 		</form>
 	</div>
 	<br />
+
+	<!-- Formulário de Pesquisa -->
+	<div align="center" style="margin-top: 20px;">
+
+		<form action="/pesquisarpessoa" method="post">
+			<table border="1" cellpadding="5">
+				<tr>
+					<td><input type="text" name="nomepesquisa" id="nomepesquisa"
+						size="45" /> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td colspan="2" align="center"><input type="submit"
+						value="Pesquisar" />
+				</tr>
+
+			</table>
+		</form>
+
+	</div>
 	<!-- <a href="/listapessoas">Lista de Pessoas</a> -->
 	<br />
+
 	<div align="center">
 
 		<table border="1" cellpadding="5">
@@ -71,7 +91,8 @@
 				<td th:text="${pessoa.idade}"></td>
 				<td><a
 					th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}" />Editar</a>
-					&nbsp;&nbsp;&nbsp;&nbsp; <a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
+					&nbsp;&nbsp;&nbsp;&nbsp; <a
+					th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
 					onclick="return confirm('Tem certeza que deseja excluir ?')">Excluir</a></td>
 			</tr>
 
