@@ -71,7 +71,7 @@
 				<td th:text="${pessoa.idade}"></td>
 				<td><a
 					th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}" />Editar</a>
-					&nbsp;&nbsp;&nbsp;&nbsp; <a href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
+					&nbsp;&nbsp;&nbsp;&nbsp; <a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}"
 					onclick="return confirm('Tem certeza que deseja excluir ?')">Excluir</a></td>
 			</tr>
 
