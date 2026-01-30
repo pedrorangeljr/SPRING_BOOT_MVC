@@ -78,13 +78,24 @@ public class PessoaController {
 		modelAndView.addObject("pessoaobj", new Pessoa());
 		return modelAndView;
 	}
-	
+
 	@PostMapping(value = "/pesquisarpessoa")
 	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa) {
-		
+
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoas", pessoaRepository.findPessoaByName(nomepesquisa));
 		modelAndView.addObject("pessoaobj", new Pessoa());
 		return modelAndView;
 	}
+	
+	@GetMapping(value = "/telefones/{idpessoa}")
+	public ModelAndView telefones(@PathVariable("idpessoa") Long idpessoa) {
+
+		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
+
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("pessoaobj", pessoa.get());
+		return modelAndView;
+	}
+
 }

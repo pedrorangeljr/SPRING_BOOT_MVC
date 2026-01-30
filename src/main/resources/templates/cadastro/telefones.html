@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Treinamento de spring boot</title>
+</head>
+<body>
+	<div align="center" style="margin-top: 20px;">
+
+		<h2>Informações dos Usuários</h2>
+		<a href="/cadastropessoa">Cadastro de Pessoa</a>
+		<div th:each="p: ${pessoaobj}">
+
+			<p>
+				ID: <span th:text="${p.id}"></span>
+			</p>
+			<p>
+				Nome: <span th:text="${p.nome}"></span>
+			</p>
+			<p>
+				Sobrenome: <span th:text="${p.sobrenome}"></span>
+			</p>
+			<p>
+				Email: <span th:text="${p.email}"></span>
+			</p>
+			<p>
+				Idade: <span th:text="${p.idade}"></span>
+			</p>
+		</div>
+
+	</div>
+</body>
+</html>
