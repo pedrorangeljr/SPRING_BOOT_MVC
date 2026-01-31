@@ -7,6 +7,10 @@
 </head>
 <body>
 	<div align="center" style="margin-top: 20px;">
+	 
+	 <div th:each = "m : ${msg}">
+	     <span th:text = "${m}"></span>
+	 </div>
 		<form action="/salvarpessoa" method="post" th:object="${pessoaobj}">
 
 			<table border="1" cellpadding="5">

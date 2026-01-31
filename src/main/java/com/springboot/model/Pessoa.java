@@ -9,6 +9,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -19,11 +22,21 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotNull(message = "O nome não pode ser nulo")
+	@NotEmpty(message = "O nome não pode ser vazio")
 	private String nome;
+	
+	@NotNull(message = "O sobrenome não pode ser nulo")
+	@NotEmpty(message = "O sobrenome não pode ser vazio")
 	private String sobrenome;
+	
+	@NotNull(message = "O email não pode ser nulo")
+	@NotEmpty(message = "O email não pode ser vazio")
 	private String email;
+	
+	@Min(value = 18, message = "Idade minima de 18 anos")
 	private int idade;
-
+	
 	@OneToMany(mappedBy = "pessoa",orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 
