@@ -31,14 +31,16 @@
 
 	</div>
 	<div align="center" style="margin-top: 20px;">
-		<form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post">
+		<form
+			th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}"
+			method="post">
 			<table border="1" cellpadding="5">
 				<tr>
 					<th>Telefone:</th>
 					<td><input type="text" name="numero" id="numero" size="45"
 						required="required" /></td>
 				</tr>
-					<tr>
+				<tr>
 					<th>Tipo:</th>
 					<td><input type="text" name="tipo" id="tipo" size="45"
 						required="required" /></td>
@@ -49,6 +51,22 @@
 				</tr>
 			</table>
 		</form>
+	</div>
+	<div align="center" style="margin-top: 20px;">
+		<table border="1" cellpadding="5">
+		
+		<h2>Telefones</h2>
+
+			<tr>
+				<th>Número</th>
+				<th>Tipo</th>
+			</tr>
+
+			<tr th:each="fone : ${telefones}">
+				<td th:text="${fone.numero}"></td>
+				<td th:text="${fone.tipo}"></td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>
