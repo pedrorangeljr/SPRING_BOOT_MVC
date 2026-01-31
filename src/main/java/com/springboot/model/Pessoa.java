@@ -3,6 +3,7 @@ package com.springboot.model;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class Pessoa implements Serializable {
 	private String email;
 	private int idade;
 
-	@OneToMany(mappedBy = "pessoa")
+	@OneToMany(mappedBy = "pessoa",orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 
 	public Long getId() {

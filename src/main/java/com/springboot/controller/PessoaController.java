@@ -22,7 +22,7 @@ public class PessoaController {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
+
 	@Autowired
 	private TelefoneRepository telefoneRepository;
 
@@ -92,7 +92,7 @@ public class PessoaController {
 		modelAndView.addObject("pessoaobj", new Pessoa());
 		return modelAndView;
 	}
-	
+
 	@GetMapping(value = "/telefones/{idpessoa}")
 	public ModelAndView telefones(@PathVariable("idpessoa") Long idpessoa) {
 
@@ -103,17 +103,31 @@ public class PessoaController {
 		modelAndView.addObject("telefones", telefoneRepository.getTelefones(idpessoa));
 		return modelAndView;
 	}
-	
+
 	@PostMapping(value = "/addfonePessoa/{pessoaid}")
 	public ModelAndView addfonePessoa(Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
-		
+
 		Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
 		telefone.setPessoa(pessoa);
 		telefoneRepository.save(telefone);
-		
+
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa);
 		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
+		return modelAndView;
+	}
+
+	@GetMapping(value = "/removertelefone/{idtelefone}")
+	public ModelAndView removertelefone(@PathVariable("idtelefone") Long idtelefone) {
+
+		Pessoa pessoa = telefoneRepository.findById(idtelefone).get().getPessoa();
+
+		telefoneRepository.deleteById(idtelefone);
+
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoa.getId()));
+		
 		return modelAndView;
 	}
 }
