@@ -49,7 +49,7 @@ public class PessoaController {
 	@RequestMapping(method = RequestMethod.POST, value = "/salvarpessoa")
 	public ModelAndView salvar(@Valid Pessoa pessoa, BindingResult bindingResult) {
 
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) { // retorna formulario com erros
 
 			ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 			Iterable<Pessoa> pessoaIt = pessoaRepository.findAll();
@@ -75,6 +75,8 @@ public class PessoaController {
 		andView.addObject("pessoaobj", new Pessoa());
 
 		return andView;
+		
+		
 	}
 
 	@GetMapping(value = "/listapessoas")
