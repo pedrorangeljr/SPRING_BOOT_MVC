@@ -38,12 +38,12 @@
 				<tr>
 					<th>Telefone:</th>
 					<td><input type="text" name="numero" id="numero" size="45"
-						required="required" /></td>
+						oninput="handlePhone(event)" maxlength="15"
+						placeholder="(XX) XXXXX-XXXX"  onsubmit="return validarCampos()? true : false"/></td>
 				</tr>
 				<tr>
 					<th>Tipo:</th>
-					<td><input type="text" name="tipo" id="tipo" size="45"
-						required="required" /></td>
+					<td><input type="text" name="tipo" id="tipo" size="45" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
@@ -54,8 +54,8 @@
 	</div>
 	<div align="center" style="margin-top: 20px;">
 		<table border="1" cellpadding="5">
-		
-		<h2>Telefones</h2>
+
+			<h2>Telefones</h2>
 
 			<tr>
 				<th>Número</th>
@@ -71,5 +71,62 @@
 			</tr>
 		</table>
 	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+		
+	<script type="text/javascript">
+		
+	const handlePhone = (event) => {
+        let input = event.target;
+        input.value = phoneMask(input.value);
+    }
+
+    const phoneMask = (value) => {
+        if (!value) return "";
+
+        // Remove tudo que não for dígito
+        value = value.replace(/\D/g, "");
+
+        // Define o formato com base no comprimento
+        // Se for celular (9 dígitos + DDD), o padrão é (XX) 9XXXX-XXXX
+        if (value.length > 10) {
+            // Limita a 11 dígitos para o número + 2 para o DDD
+            value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
+        } else if (value.length > 6) {
+            // Se for fixo (8 dígitos + DDD), o padrão é (XX) XXXX-XXXX
+            value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+        } else if (value.length > 2) {
+            // Apenas DDD e início do prefixo
+            value = value.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+        } else {
+            // Apenas DDD parcial
+            value = value.replace(/^(\d*)/, "($1");
+        }
+
+        return value;
+    }
+    
+    function validarCampos() {
+    	
+    	numero = document.getEelementById('numero').value;
+    	tipo = document.getEelementById('tipo').value;
+    	
+    	if(numero == '') {
+    		
+    		alert("Número deve ser informado");
+    		return false;
+    	}
+    	else if(tipo == '') {
+    		
+    		alert("Tipo deve ser informador");
+    		return false;
+    	}
+    	
+    	return true;
+    }
+    	
+	</script>
 </body>
 </html>
